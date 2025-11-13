@@ -1,0 +1,74 @@
+\documentclass[10pt,notitlepage,a4paper]{article}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, polish]{babel}
+\usepackage{amssymb,url,tikz,graphicx,lmodern}
+\newcommand{\N}{\mathbb{N}}
+\pagestyle{empty}
+
+
+% Ikonki z poziomami zadań
+\newcommand{\icon}[1]{\includegraphics[width=18pt]{#1}}
+\newcounter{zadanie}
+
+\newcommand{\zadanie}[2]{
+\medskip
+\stepcounter{zadanie}    
+\noindent \textbf{Zadanie \thezadanie{}} ({#1}, zasady: #2).
+}
+
+\newenvironment{zadanieIV}[1]
+{\par \ignorespaces
+\zadanie{#1}{%
+\icon{ikony/ikona-www-ok.png} 
+\icon{ikony/ikona-grupy-bad.png}
+\icon{ikony/ikona-ai-bad.png}  
+}}
+{\ignorespacesafterend}
+
+\newenvironment{zadanieIII}[1]
+{\par \ignorespaces
+\zadanie{#1}{%
+\icon{ikony/ikona-www-ok.png} 
+\icon{ikony/ikona-grupy-ok.png} 
+\icon{ikony/ikona-ai-bad.png}  
+}}
+{\ignorespacesafterend}
+
+\newenvironment{zadanieII}[1]
+{\par \ignorespaces
+\zadanie{#1}{%
+\icon{ikony/ikona-www-ok.png} 
+\icon{ikony/ikona-grupy-ok.png} 
+\icon{ikony/ikona-ai-ok.png} 
+}}
+{\ignorespacesafterend}
+
+
+\newenvironment{zadanieI}[1]
+{\par \ignorespaces
+\zadanie{#1}{%
+\icon{ikony/ikona-www-ok.png} 
+\icon{ikony/ikona-grupy-ok.png} 
+\icon{ikony/ikona-ai-ok.png} 
+}}
+{\ignorespacesafterend}
+
+\newcommand{\legenda}{
+\vfill
+\begin{tabular}{|ll|}
+\hline
+\multicolumn{2}{|c|}{Zasady \footnotesize (wersja 1.3)}\\%\hline&\\[0.1pt]
+\icon{ikony/ikona-www-ok.png} Wolno korzystać z literatury (w tym online)
+&
+\icon{ikony/ikona-www-bad.png} Użyj tylko własnej wiedzy\\
+\icon{ikony/ikona-grupy-ok.png} Wolno rozwiązywać zadanie w grupie & \icon{ikony/ikona-grupy-bad.png} Pracuj sam, nie w grupie 
+\\
+\icon{ikony/ikona-ai-ok.png} Wolno korzystać z modeli generatywnych & \icon{ikony/ikona-ai-bad.png} Nie korzystaj z modeli generatywnych
+\\
+\multicolumn{2}{|c|}{\textbf{Zawsze} oddawaj tylko rozwiązania które rozumiesz. \textbf{Zawsze} podawaj wykorzystane źródła.}%\\
+%\multicolumn{2}{|c|}{Przez ,,gotowca'' rozumie się przede wszystkim proszenie kogoś o gotowe rozwiązanie.}
+\\\hline
+\end{tabular}
+}

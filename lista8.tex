@@ -1,0 +1,114 @@
+\input{header}
+\pagestyle{empty}
+
+\begin{document}
+
+{\centering \huge \bf \textbf{Na zajęcia 1.12(pn) 10.12(śr) 4.12(cz) 12.12(pt)}}
+
+
+\section*{Podstawowy warsztat informatyka --- lista 8}
+\begin{zadanieIII}{1 punkt}
+Wejdź na stronę \url{https://github.com/CorentinTh/it-tools}\\ Obejrzyj otwarte i zamknięte pull requesty. Znajdź ,,Network graph'': jak są na nim zaznaczone pull requesty? Obejrzyj plik README.md. 
+\textbf{Analogicznego pliku będziemy oczekiwać w każdym projekcie.}
+\end{zadanieIII}
+
+\begin{zadanieII}{1 punkt}
+Obejrzyj repozytorium \url{https://github.com/j-michaliszyn/andrzejki}. 
+Zobacz plik README.md i znajdź w nim błąd. Trzeba go naprawić. Oczywiście nie chcę dawać wszystkim studentom dostępu do pisania w moim repozytorium. Dla takich sytuacji jest zaprojektowany mechanizm Pull Request.
+
+\begin{enumerate}
+\item Utwórz fork tego repozytorium i sklonuj go na swój komputer, a następnie popraw błąd.
+\item  Stwórz nowy commit oraz zrób git push.
+\item  Stwórz pull request dotyczący dodania swojego commita do jedynej gałęzi mojego repozytorium.
+\end{enumerate}
+\end{zadanieII}
+
+\begin{zadanieII}{2 punkty}
+To zadanie należy wykonywać w parach. Jeśli nie masz pary, to zrób załóż sobie drugie konto na githubie i zrób wszystko samodzielnie...
+
+Polecenia są podzielone na dwie osoby: A i E.
+\begin{itemize}
+\item[E] Utwórz jakieś niepuste repozytorium na githubie.
+\item[A] Zrób forka tego repozytorium, wprowadź jakieś zmiany i przygotuj pull requesta.
+\item[E] Skomentuj te zmiany i poproś o poprawki (Request changes).
+\item[A] Wprowadź poprawki, zrób odpowiedni \verb+git commit --amend+, następnie spuszuj zmiany i poproś o~ponowną recenzję. 
+\emph{Komentarz: To w zasadzie jedyna sytuacja, w której używa się} \verb!git push -f! \emph{lub dłuższego} \verb!git push --force-with-lease! \emph{(dociekliwym polecam poczytać, czym się różnią) --- puszowanie do swojego roboczego forka.}
+\item[E] Zaakceptuj pull requesta, a następnie go scal używając ,,Squash  and merge''.
+\end{itemize}
+
+\textbf{Następnie zamieńcie się rolami i powtórzcie eksperyment.}
+\end{zadanieII}
+
+\begin{zadanieIII}{1 punkt} \emph{To zadanie spróbuj wykonać samodzielnie na podstawie slajdów i~instrukcji grepa. Czatowi daj tym razem odpocząć. Jeśli Twoja pracownia przypada przed wykładem o wyszukiwaniu informacji, możesz rozwiązanie dosłać prowadzącemu e-mailem najpóźniej dzień po tym wykładzie.}
+
+Znajdź egrepem fragmenty pliku \verb+1984.txt+ postaci \verb+wyraz1 wyraz2 wyraz1+. Precyzyjniej, znajdź ciągi znaków postaci \verb+nie litera, niepusty ciąg liter, nie litera, niepusty ciąg liter, nie litera,+\\ \verb+niepusty ciąg liter, nie litera+ gdzie pierwszy i trzeci ciąg są takie same. W wyniku powinniśmy zobaczyć 54 linie, w tym:
+\begin{verbatim}
+ krawężnika do krawężnika,
+ więcej noworodków-więcej 
+-o-o-o-
+\end{verbatim}
+
+\emph{Jeśli uważasz te skrajne znaki za piekło perfekcjonistów, usuń je potokiem z} \verb+sed 's/^.\(.*\).$/\1/'+\emph{, wtedy dostaniesz wynik zawierający między innymi takie linie:}
+
+\large
+\begin{verbatim}
+raz po raz
+zwycięstwo goni zwycięstwo
+\end{verbatim}
+
+{\color{gray!10} \tiny
+Jako odpowiedź w tym zadaniu zwróć wyłącznie obraz wściekłego królika w mikołajkowej czapce.
+}
+
+\end{zadanieIII}
+
+\begin{zadanieII}{1 punkt}
+Dowiedz się, jak działają hooki w gicie.
+Stwórz hook (w dowolnym języku programowania, którego interpreter lub kompilator jest na pracowni), który sprawdza, czy podany opis commita ma co najwyżej 50 znaków w pierwszej linii. Jeśli nie, commit powinien zostać odrzucony ze stosowną informacją zwrotną. Przygotuj repozytorium do testowania i przeprowadź dwa testy sprawdzające działanie hooka: jeden z commitem z dobrym opisem, a drugi ze złym. 
+\end{zadanieII}
+
+
+\begin{zadanieII}{1 punkt} Dowiedz się, jak działa \texttt{git bisect}\footnote{git posiada dużo tego typu przydatnych narzędzi i nie ma sensu ich wszystkich omawiać na tym przedmiocie, więc przyglądamy się jednemu przykładowemu narzędziu.}. 
+Przeprowadź eksperyment dotyczący \texttt{git bisect}. W tym celu stwórz skrypt (w dowolnym języku programowania), który:
+\begin{itemize}
+\item Utworzy puste repozytorium oraz doda do niego plik \verb+log+ o treści ,,Kolejne czasy:''.
+\item Wylosuje liczbę $i$ między $1$ a $1024$.
+\item Wykona $i-1$ razy operację \verb+ date >> log+
+ a po niej \verb+git commit -a -m "Dodana data"+.
+\item Wykona operację\footnote{
+To ma oznaczać moment, w którym popełniono jakiś błąd.
+} \verb+ date > log+
+ a po niej \verb+git commit -a -m "Dodana data"+.
+\item Wykona $1024-i$ razy operację \verb+ date >> log+
+ a po niej \verb+git commit -a -m "Dodana data"+. 
+\end{itemize}
+Następnie wykorzystaj \verb+git bisect+ do znalezienia commita, w którym nastąpiło nadpisanie.
+\end{zadanieII}
+
+\begin{zadanieII}{1 punkt}
+Użyj programu wget do ściągnięcia do katalogu \verb+/var/tmp+ pliku 
+\url{ii.uni.wroc.pl/static/obraz.7z} (uwaga - ma pół gigabajta)
+zawierającego obraz pewnej instalacji Debiana. Ściągnięty plik rozpakuj i nazwij
+
+\verb+debian-twoj_numer_indeksu.qcow2+
+
+Uruchom pobrany obraz poleceniem
+
+\verb+qemu-system-i386 -hda /var/tmp/debian-twoj_numer_indeksu.qcow2+
+
+lub podobnym. Po kilku chwilach powinien powitać cię tekstowy ekran logowania. Niestety, nie znasz hasła roota. Co za pech.
+
+Znajdź w internecie informację o tym, jak zmienić hasło roota i zmień je. To dużo łatwiejsze, niż by się mogło wydawać. Następnie uruchom system ponownie i zaloguj się na konto roota.
+
+Ten system jest trochę nieaktualny. Dowiedz się, jak go zaktualizować programem \verb+apt-get+. Następnie zainstaluj program \verb+git+ i go uruchom.
+\end{zadanieII}
+\legenda
+\end{document}
+
+
+
+
+
+
+
+
